@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+    int n;
+    cin>>n;
+    map<int,int>wallet;
+    while(n--)
+    {
+        int userid,balance;
+        cin>>userid>>balance;
+        wallet[userid]=balance;
+    }
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int us1,us2,amount;
+        cin>>us1>>us2>>amount;
+        if(wallet[us1]>=amount)
+        {
+            cout<<"Success"<<"\n";
+            wallet[us1]-=amount;
+            wallet[us2]+=amount;
+        }
+        else
+            cout<<"Failure"<<"\n";
+    }
+    cout<<"\n";
+    vector<pair<int, int>> idValuePairs(wallet.begin(), wallet.end());
+    sort(idValuePairs.begin(), idValuePairs.end(), [](pair<int, int> a, pair<int, int> b)
+    {
+        return a.second < b.second; 
+    });
+    for (const auto& pair : idValuePairs) 
+    {
+        cout << pair.first <<" "<< pair.second << endl;
+    }
+}
